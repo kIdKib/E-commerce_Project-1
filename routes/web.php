@@ -30,6 +30,8 @@ Route::get('/', [FrontController::class ,  'mainpage'])->name('index');
 Route::get('/àpropos', [FrontController::class ,  'about'])->name('about');
 Route::get('/contact', [FrontController::class ,  'contact'])->name('contact');
 Route::get('/boutique', [FrontController::class ,  'boutique'])->name('boutique');
+Route::post('/boutique/search', [FrontController::class ,  'boutiqueSearch'])->name('boutiqueSearch');
+Route::get('/boutique/search/{slug}', [FrontController::class ,  'boutiqueResult'])->name('boutiqueResult');
 
 
 
@@ -41,6 +43,19 @@ Route::get('view-product/{prod_slug}',[FrontController::class ,  'eachProdView']
 
 
 
+
+
+
+
+
+
+
+
+
+/** ______________________________________________________________________________________________________________
+ * ______________________________________________________________________________________________________________
+ * _______________________________________________________________________________________________________________
+ */
 
 
 

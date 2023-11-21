@@ -14,36 +14,82 @@ class FrontController extends Controller
         $category = category::where('id','>=','1')->take(3)->get();
         $product = Product::where('id','>=','251')->take(15)->get();
 
-        $about = false;
+        $homePage = true;
 
-
-        return view('newLayouts.pages.navbarPages.index' , compact('category', 'product', 'about'));
+        return view('newLayouts.pages.navbarPages.index' , compact('category', 'product', 'homePage'));
     }
 
     public function about()
     {
-        $about = true;
-
-        return view('newLayouts.pages.navbarPages.aboutus', compact('about') );
+        return view('newLayouts.pages.navbarPages.aboutus' );
     }
 
     public function contact()
     {
-        $about = true;
-
-        return view('newLayouts.pages.navbarPages.contact', compact('about') );
+        return view('newLayouts.pages.navbarPages.contact' );
     }
 
 
-
-    public function boutique()
+    public function boutique(Request $request)
     {
-        $about = true;
+        $categories = Category::where('status','0')->get();
+        $products = Product::where('id','>=','251')->take(15)->paginate(12);
 
-        $category = Category::where('status','0')->get();
 
-        return view('newLayouts.pages.navbarPages.boutique', compact('about') );
+        return view('newLayouts.pages.navbarPages.boutique', compact('categories', 'products'));
     }
+
+
+    public function boutiqueSearch(Request $request)
+    {
+      $search_product = $request->product_name;
+        if($search_product != "")
+        {
+         return redirect('boutique/search/'.$search_product);
+
+        }
+        else
+        {
+            return redirect()->back();
+        }
+    }
+
+
+
+    public function boutiqueResult($slug)
+    {
+
+        $products = Product::where('name',"LIKE","%$slug%")->paginate(12);
+        if($products)
+        {
+            $categories = Category::get();
+            return view('newLayouts.pages.navbarPages.boutique', compact('categories', 'products'));
+        }
+        else
+        {
+            return redirect('/boutique')->with('status',"No Such Product Found");
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

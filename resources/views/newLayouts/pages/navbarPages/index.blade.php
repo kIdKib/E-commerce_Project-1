@@ -186,8 +186,8 @@
             <div class="menu-style-3 menu-hover text-center">
                 <nav>
                     <ul>
-                        <li><a href="#">Acceuil</a></li>
-                        <li><a href="#">Catégories <i class="pe-7s-angle-down"></i> <span class="sticker-new">hot</span></a>
+                        <li><a href="{{route('index')}}">Acceuil</a></li>
+                        <li><a href="{{route('boutique')}}">Catégories <i class="pe-7s-angle-down"></i> <span class="sticker-new">hot</span></a>
                             <ul class="single-dropdown">
                                 <li><a href="about-us.html">about us</a></li>
                                 <li><a href="menu-list.html">menu list</a></li>
@@ -199,7 +199,7 @@
                                 <li><a href="contact.html">contact</a></li>
                             </ul>
                         </li>
-                        <li><a href="shop.html">Magasin <i class="pe-7s-angle-down"></i> <span class="sticker-new">hot</span></a>
+                        <li><a href="#">Magasin <i class="pe-7s-angle-down"></i> <span class="sticker-new">hot</span></a>
                             <div class="category-menu-dropdown shop-menu">
                                 <div class="category-dropdown-style category-common2 mb-30">
                                     <h4 class="categories-subtitle"> shop layout</h4>
@@ -236,8 +236,8 @@
                                 </div>
                             </div>
                         </li>
-                        <li><a href="blog.html">À propos</a></li>
-                        <li><a href="contact.html">contact</a></li>
+                        <li><a href="{{route('about')}}">À propos</a></li>
+                        <li><a href="{{route('contact')}}">contact</a></li>
                     </ul>
                 </nav>
             </div>
