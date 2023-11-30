@@ -67,7 +67,7 @@ Route::get('/email', function(){
 });
 
 
-Route::post('add-to-cart',[CartController::class,'addProduct']);
+Route::post('add-to-cart',[CartController::class,'addProduct'])->name('addProductCart');
 Route::post('delete-cart-item',[CartController::class,'deleteProduct']);
 Route::post('update-cart',[CartController::class,'updateCart']);
 Route::post('searchProduct',[FrontController::class , 'searchProducts']);
@@ -77,9 +77,9 @@ Route::view('about' , 'frontend.About');
 
 
 Route::middleware(['auth' ])->group(function () {
-    Route::get('cart',[CartController::class , 'viewCart']);
-    Route::get('checkout', [CheckoutController::class , 'index']);
-    Route::post('place-order',[CheckoutController::class , 'placeOrder']);
+    Route::get('cart',[CartController::class , 'viewCart'])->name('viewCart');
+    Route::get('checkout', [CheckoutController::class , 'index'])->name('checkoutCartOrder');
+    Route::post('place-order',[CheckoutController::class , 'placeOrder'])->name('placeOrder');
     Route::get('my-order',[UserController::class , 'index']);
     Route::get('view-order/{id}',[UserController::class , 'viewOrder']);
 });

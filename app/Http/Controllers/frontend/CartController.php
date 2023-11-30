@@ -13,8 +13,13 @@ class CartController extends Controller
 {
     public function addProduct(Request $request)
     {
-        $product_id  = $request->input('product_id');
-        $product_qty = $request->input('product_qty');
+
+        $product_qty = 1;
+
+        $product_id  = $request->input('produit_id');
+        if(isset($request->product_qty)) $product_qty = $request->input('product_qty');
+
+
 
         if(Auth::check())
         {
@@ -22,10 +27,11 @@ class CartController extends Controller
             if($user->hasVerifiedEmail())
             {
                 $product_check = Product::where('id',$product_id)->first();
+
                 if($product_check)
                 {
                     if(Cart::where('prod_id',$product_id)->where('user_id',Auth::id())->exists())
-                    {   
+                    {
                        return response()->json(['status'=> $product_check->name." Already In Cart"]);
                     }
                     else
@@ -49,11 +55,15 @@ class CartController extends Controller
             return response()->json(['status' => "Please Login First..."]);
         }
     }
+
+
     public function viewCart()
     {
         $cartItem = Cart::where('user_id' , Auth::id())->get();
         return view("frontend.cart", compact('cartItem'));
     }
+
+
     public function deleteProduct(Request $request)
     {
         if(Auth::check())

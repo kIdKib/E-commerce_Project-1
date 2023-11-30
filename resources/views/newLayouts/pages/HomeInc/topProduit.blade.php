@@ -1,4 +1,3 @@
-
 <div class="electro-product-wrapper wrapper-padding pt-95 pb-45">
     <div class="container-fluid">
         <div class="section-title-4 text-center mb-40">
@@ -46,9 +45,13 @@
                                             <a class="animate-right" href="#" data-bs-target="#exampleModal" data-bs-toggle="modal" title="Quick View">
                                                 <i class="pe-7s-look"></i>
                                             </a>
-                                            <a class="animate-top" title="Add To Cart" href="#">
-                                                <i class="pe-7s-cart"></i>
-                                            </a>
+                                            <form action="{{route('addProductCart')}}" method="POST">
+                                                @csrf
+                                                <input type="text" style="display: none" name='produit_id' value="{{$produit->id}}">
+                                                <button class="animate-top" title="Add To Cart">
+                                                    <i class="pe-7s-cart"></i>
+                                                </button>
+                                            </form>
                                             <a class="animate-left" title="Wishlist" href="#">
                                                 <i class="pe-7s-like"></i>
                                             </a>

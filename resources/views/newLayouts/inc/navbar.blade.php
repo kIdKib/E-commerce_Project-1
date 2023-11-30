@@ -17,8 +17,8 @@
                                 <ul class="single-dropdown">
                                     <li><a href="about-us.html">about us</a></li>
                                     <li><a href="menu-list.html">menu list</a></li>
-                                    <li><a href="login.html">login</a></li>
-                                    <li><a href="register.html">register</a></li>
+                                    <li><a href="{{route('login')}}">login</a></li>
+                                    <li><a href="{{route('register')}}">register</a></li>
                                     <li><a href="cart.html">cart page</a></li>
                                     <li><a href="checkout.html">checkout</a></li>
                                     <li><a href="wishlist.html">wishlist</a></li>
@@ -117,8 +117,8 @@
                                     <ul>
                                         <li><a href="about-us.html">about us</a></li>
                                         <li><a href="menu-list.html">menu list</a></li>
-                                        <li><a href="login.html">login</a></li>
-                                        <li><a href="register.html">register</a></li>
+                                        <li><a href="{{ route('login')}}">Connexion</a></li>
+                                        <li><a href="{{ route('register')}}">S'inscrire</a></li>
                                         <li><a href="cart.html">cart page</a></li>
                                         <li><a href="checkout.html">checkout</a></li>
                                         <li><a href="wishlist.html">wishlist</a></li>
@@ -167,8 +167,8 @@
             <div class="furniture-bottom-wrapper">
                 <div class="furniture-login">
                     <ul>
-                        <li>Get Access: <a href="login.html">Se connecter </a></li>
-                        <li><a href="register.html">S'inscrire </a></li>
+                        <li>Get Access: <a href="{{ route   ('login')}}">Se connecter </a></li>
+                        <li><a href="{{ route('register')}}">S'inscrire </a></li>
                     </ul>
                 </div>
                 <div class="furniture-search">
