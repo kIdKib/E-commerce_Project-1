@@ -34,60 +34,31 @@
                     </nav>
                 </div>
                 <div class="header-cart">
-                    <a class="icon-cart-furniture" href="#">
+                    <a class="icon-cart-furniture" href="{{route('viewCart')}}">
                         <i class="ti-shopping-cart"></i>
-                        <span class="shop-count-furniture green">02</span>
+                        <span class="shop-count-furniture green">{{count($cart)}}</span>
                     </a>
                     <ul class="cart-dropdown">
-                        <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="assets/img/cart/1.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h5><a href="#"> Bits Headphone</a></h5>
-                                <h6><a href="#">Black</a></h6>
-                                <span>$80.00 x 1</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#"><i class="ti-trash"></i></a>
-                            </div>
-                        </li>
-                        <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="assets/img/cart/2.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h5><a href="#"> Bits Headphone</a></h5>
-                                <h6><a href="#">Black</a></h6>
-                                <span>$80.00 x 1</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#"><i class="ti-trash"></i></a>
-                            </div>
-                        </li>
-                        <li class="single-product-cart">
-                            <div class="cart-img">
-                                <a href="#"><img src="assets/img/cart/3.jpg" alt=""></a>
-                            </div>
-                            <div class="cart-title">
-                                <h5><a href="#"> Bits Headphone</a></h5>
-                                <h6><a href="#">Black</a></h6>
-                                <span>$80.00 x 1</span>
-                            </div>
-                            <div class="cart-delete">
-                                <a href="#"><i class="ti-trash"></i></a>
-                            </div>
-                        </li>
-                        <li class="cart-space">
-                            <div class="cart-sub">
-                                <h4>Subtotal</h4>
-                            </div>
-                            <div class="cart-price">
-                                <h4>$240.00</h4>
-                            </div>
-                        </li>
+                        @foreach ($cart as $item)
+                            <li class="single-product-cart">
+                                <div class="cart-img" style="width: 65%">
+                                    <a href="#">
+                                        <img src="{{ asset('upload/product/'.$item->products->image)}}" style="width: 100%; height:125px; object-fit: cover">
+                                    </a>
+                                </div>
+                                <div class="cart-title">
+                                    <h5><a href="#">{{ $item->products->name }}</a></h5>
+                                    <span>{{$item->products->selling_price}} CFA x {{$item->prod_qty}} qte</span>
+                                </div>
+                                <div class="cart-delete">
+                                    <a href="#"><i class="ti-trash"></i></a>
+                                </div>
+                            </li>
+                        @endforeach
+
+
                         <li class="cart-btn-wrapper">
-                            <a class="cart-btn btn-hover" href="#">view cart</a>
+                            <a class="cart-btn btn-hover" href="{{route('viewCart')}}">view cart</a>
                             <a class="cart-btn btn-hover" href="#">checkout</a>
                         </li>
                     </ul>
@@ -167,8 +138,23 @@
             <div class="furniture-bottom-wrapper">
                 <div class="furniture-login">
                     <ul>
-                        <li>Get Access: <a href="{{ route   ('login')}}">Se connecter </a></li>
-                        <li><a href="{{ route('register')}}">S'inscrire </a></li>
+                        @if (auth()->user())
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                                {{ __('Déconnexion') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                        @else
+                            <li>Get Access: <a href="{{ route   ('login')}}">Se connecter </a></li>
+                            <li><a href="{{ route('register')}}">S'inscrire </a></li>
+                        @endif
+
                     </ul>
                 </div>
                 <div class="furniture-search">

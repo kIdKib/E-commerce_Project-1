@@ -2,41 +2,51 @@
 
 namespace App\Http\Controllers\frontend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class FrontController extends Controller
 {
+    private function cart() {
+        $cart = Cart::get();
+        return $cart;
+    }
+
     public function mainpage()
     {
+        $cart = $this->cart();
         $category = category::where('id','>=','1')->take(3)->get();
         $product = Product::where('id','>=','251')->take(15)->get();
 
         $homePage = true;
 
-        return view('newLayouts.pages.navbarPages.index' , compact('category', 'product', 'homePage'));
+        return view('newLayouts.pages.navbarPages.index' , compact('category', 'product', 'homePage','cart'));
     }
 
     public function about()
     {
-        return view('newLayouts.pages.navbarPages.aboutus' );
+        $cart = $this->cart();
+        return view('newLayouts.pages.navbarPages.aboutus', compact('cart') );
     }
 
     public function contact()
     {
-        return view('newLayouts.pages.navbarPages.contact' );
+        $cart = $this->cart();
+        return view('newLayouts.pages.navbarPages.contact', compact('cart') );
     }
 
 
     public function boutique(Request $request)
     {
+        $cart = $this->cart();
         $categories = Category::where('status','0')->get();
         $products = Product::where('id','>=','251')->take(15)->paginate(12);
 
 
-        return view('newLayouts.pages.navbarPages.boutique', compact('categories', 'products'));
+        return view('newLayouts.pages.navbarPages.boutique', compact('categories', 'products', 'cart'));
     }
 
 

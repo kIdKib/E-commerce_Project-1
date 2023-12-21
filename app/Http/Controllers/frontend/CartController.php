@@ -59,8 +59,9 @@ class CartController extends Controller
 
     public function viewCart()
     {
+        $cart = Cart::get();
         $cartItem = Cart::where('user_id' , Auth::id())->get();
-        return view("frontend.cart", compact('cartItem'));
+        return view("newLayouts.inc.cart", compact('cartItem', 'cart'));
     }
 
 

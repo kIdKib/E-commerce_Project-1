@@ -15,6 +15,7 @@ class CheckoutController extends Controller
 {
     public function index()
     {
+        $cart = Cart::get();
         $old_cartitem=Cart::where('user_id',Auth::id())->get();
         foreach($old_cartitem as $item)
         {
@@ -25,14 +26,14 @@ class CheckoutController extends Controller
             }
         }
         $cartitem=Cart::where('user_id',Auth::id())->get();
-        return view('frontend.checkout' , compact('cartitem'));
+        return view('newLayouts.inc.checkout' , compact('cartitem', 'cart'));
     }
 
     public function placeOrder(Request $request)
     {
         $order  = new Order();
         $order->user_id = Auth::id();
-        $order->fname = $request->input('fname');
+        // $order->fname = $request->input('fname');
         $order->lname = $request->input('lname');
         $order->email = $request->input('email');
         $order->phoneno = $request->input('phoneno');
@@ -72,19 +73,19 @@ class CheckoutController extends Controller
             $prod->update();
         }
 
-        if(Auth::user()->address1 == NULL)
-        {
-            $user = User::where('id',Auth::id())->first();
-            $user->lname = $request->input('lname');
-            $user->phoneno = $request->input('phoneno');
-            $user->address1 = $request->input('address1');
-            $user->address2 = $request->input('address2');
-            $user->city = $request->input('city');
-            $user->state = $request->input('state');
-            $user->country = $request->input('country');
-            $user->pincode = $request->input('pincode');
-            $user->update();
-        }
+        // if(Auth::user()->address1 == NULL)
+        // {
+        //     $user = User::where('id',Auth::id())->first();
+        //     // $user->lname = $request->input('lname');
+        //     $user->phoneno = $request->input('phoneno');
+        //     $user->address1 = $request->input('address1');
+        //     $user->address2 = $request->input('address2');
+        //     $user->city = $request->input('city');
+        //     $user->state = $request->input('state');
+        //     $user->country = $request->input('country');
+        //     $user->pincode = $request->input('pincode');
+        //     $user->update();
+        // }
         $cartitems = Cart::where('user_id',Auth::id());
         Cart::destroy($cartitem);
 

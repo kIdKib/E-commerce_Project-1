@@ -78,10 +78,10 @@
                 </div>
                 <div class="categories-cart same-style">
                     <div class="same-style-icon">
-                        <a href="{{url('cart')}}"><i class="pe-7s-cart"></i></a>
+                        <a href="{{route('viewCart')}}"><i class="pe-7s-cart"></i></a>
                     </div>
                     <div class="same-style-text">
-                        <a href="{{url('cart')}}">Mon Panier</a>
+                        <a href="{{route('viewCart')}}">Mon Panier</a>
                     </div>
                 </div>
             </div>
